@@ -21,14 +21,15 @@ async function main(fileUrl: string) {
                     const leftDigit = Number(element[stringIndex]);
                     const rightDigit = Number(element[stringIndex + 1]);
                     console.log("left: ",leftDigit," right: ", rightDigit)
+                    const diff = Math.abs(leftDigit - rightDigit)
                     const isAscendingDigit = isAscending(leftDigit, rightDigit);
     
-                    if ((isAscendingDigit && !isAscendingLine) || (!isAscendingDigit && isAscendingLine)) {
+                    if ((isAscendingDigit && !isAscendingLine) || (!isAscendingDigit && isAscendingLine) || isUnsafeDiff(diff)) {
                         console.log("Found unsafe pattern - incrementing isUnsafe");
                         isUnsafe++;
                     }
                 }
-                if (isUnsafe === 0) {
+                if (!isUnsafe) {
                     console.log(`Line{${element}} is safe - incrementing safeLine`);
                     safeLine++;
                 } else {
@@ -51,15 +52,25 @@ function isAscending(firstDigit: number, secondDigit: number): boolean {
     return false
 }
 
+function isUnsafeDiff(diff: number) {
+    if (diff < 1 || Math.abs(diff) > 3 ) {
+        diff < 1 ? console.log("Number is even") : console.log(`Diff is too big because it's ${diff}`)
+        return true;
+    }
+    return false;
+}
+
 function isSafeEarlyCheck(firstDigit: number, secondDigit: number): boolean {
     if (Number.isNaN(firstDigit) || Number.isNaN(secondDigit)) {
         console.log("NaN check failed");
         return false;
     }
-    if (firstDigit - secondDigit === 0) {
-        console.log(firstDigit, secondDigit)
-        return false;
-    }
+    
+    const diff = Math.abs(firstDigit - secondDigit)
+    console.log(`Difference between digits: ${firstDigit} and ${secondDigit} in absolute is ${diff}`);
+    if (isUnsafeDiff(diff)) return false;
+
+
     console.log("All early checks passed");
     return true;
 }
