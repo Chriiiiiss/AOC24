@@ -8,23 +8,23 @@ async function main(fileUrl: string) {
         let safeLine = 0
 
         for (let lineIndex = 0; lineIndex < inputLines.length; lineIndex++) {
-            const element: string = inputLines[lineIndex].replaceAll(" ", "");
-            const firstDigit = Number(element[0])
-            const secondDigit = Number(element[1])
+            const element: string[] = inputLines[lineIndex].split(" ")
+            const firstNumber = Number(element[0])
+            const secondNumber = Number(element[1])
             let isUnsafe = 0
 
 
-            if (isSafeEarlyCheck(firstDigit, secondDigit)) {
-                const isAscendingLine: boolean = isAscending(firstDigit, secondDigit)
+            if (isSafeEarlyCheck(firstNumber, secondNumber)) {
+                const isAscendingLine: boolean = isAscending(firstNumber, secondNumber)
     
                 for (let stringIndex = 0; stringIndex < element.length - 1; stringIndex++) {
-                    const leftDigit = Number(element[stringIndex]);
-                    const rightDigit = Number(element[stringIndex + 1]);
-                    console.log("left: ",leftDigit," right: ", rightDigit)
-                    const diff = Math.abs(leftDigit - rightDigit)
-                    const isAscendingDigit = isAscending(leftDigit, rightDigit);
+                    const leftNumber = Number(element[stringIndex]);
+                    const rightNumber = Number(element[stringIndex + 1]);
+                    console.log("left: ",leftNumber," right: ", rightNumber)
+                    const diff = Math.abs(leftNumber - rightNumber)
+                    const isAscendingNumber = isAscending(leftNumber, rightNumber);
     
-                    if ((isAscendingDigit && !isAscendingLine) || (!isAscendingDigit && isAscendingLine) || isUnsafeDiff(diff)) {
+                    if ((isAscendingNumber && !isAscendingLine) || (!isAscendingNumber && isAscendingLine) || isUnsafeDiff(diff)) {
                         console.log("Found unsafe pattern - incrementing isUnsafe");
                         isUnsafe++;
                     }
@@ -47,8 +47,9 @@ async function main(fileUrl: string) {
     }
 }
 
-function isAscending(firstDigit: number, secondDigit: number): boolean {
-    if (firstDigit - secondDigit < 0) return true
+function isAscending(firstNumber: number, secondNumber: number): boolean {
+    console.log()
+    if (firstNumber - secondNumber < 0) return true
     return false
 }
 
@@ -60,14 +61,14 @@ function isUnsafeDiff(diff: number) {
     return false;
 }
 
-function isSafeEarlyCheck(firstDigit: number, secondDigit: number): boolean {
-    if (Number.isNaN(firstDigit) || Number.isNaN(secondDigit)) {
+function isSafeEarlyCheck(firstNumber: number, secondNumber: number): boolean {
+    if (Number.isNaN(firstNumber) || Number.isNaN(secondNumber)) {
         console.log("NaN check failed");
         return false;
     }
     
-    const diff = Math.abs(firstDigit - secondDigit)
-    console.log(`Difference between digits: ${firstDigit} and ${secondDigit} in absolute is ${diff}`);
+    const diff = Math.abs(firstNumber - secondNumber)
+    console.log(`Difference between digits: ${firstNumber} and ${secondNumber} in absolute is ${diff}`);
     if (isUnsafeDiff(diff)) return false;
 
 
