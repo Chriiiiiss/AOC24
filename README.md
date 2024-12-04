@@ -14,7 +14,7 @@ To run a solution:
 
 1. Navigate to the day's directory
 2. Install dependencies: `npm install`
-3. Run the solution: `npm run dev`
+3. Run the solution: `run ts-node main.ts <input-file>`
 
 ## Progress
 
