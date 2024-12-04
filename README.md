@@ -4,10 +4,9 @@ This repository contains my solutions for the [Advent of Code 2024](https://adve
 
 ## Structure
 
-Each day's solution is in its own directory (`D1`, `D2`, etc.) and includes:
+Each day's solution is in its own directory (`day_01`, `day_01`, etc.) and includes:
 - Input file
-- TypeScript solution
-- Supporting configuration files
+- TypeScript
 
 ## Running Solutions
 
@@ -20,7 +19,9 @@ To run a solution:
 ## Progress
 
 - [x] Day 1
-- [ ] Day 2
+- [x] Day 2
+- [ ] Day 3
+- [ ] Day 4
 ...
 
 ## About Advent of Code
